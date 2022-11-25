@@ -1,6 +1,6 @@
 name: Bug Report
 description: Report a bug!
-title: ""
+title: "BUG: "
 labels: [Bug]
 assignees: []
 body:
@@ -32,7 +32,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: debug
+    id: errorcode
     attributes:
       label: Error code
       description: Was there a error code provided? If so please put it here.
@@ -41,3 +41,11 @@ body:
     attributes:
       label: Additional Info
       description: Any additional info that you think might be useful.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      description: Before submitting your feature request, please affirm the following
+      options:
+        - label: I have checked for [similar bug reports](https://github.com/ItsTeraBytes/Choir-Discord-Bot/labels/Bug) to avoid duplicate reports
+          required: true
