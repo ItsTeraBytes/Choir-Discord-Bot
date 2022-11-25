@@ -23,7 +23,7 @@ module.exports = (client) => {
     }
 
     const clientId = config['CLIENT_ID'];
-    const guildId = config['GUILD'];
+    const guildId = config['GUILD_ID'];
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
       console.log(`Started refreshing application slash commands!`);
