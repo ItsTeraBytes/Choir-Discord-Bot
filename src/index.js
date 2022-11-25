@@ -1,15 +1,21 @@
-const Discord = require("discord.js")
-const client = new Discord.Client()
-require('dotenv').config()
+const { Client, Collection, GatewayIntentBits } = require(`discord.js`);
+const fs = require(`fs`);
+const client = new Client({ intents: GatewayIntentBits.Guilds });
 
-client.on("ready", () => {
-  console.log('We have logged in as ${client.user.tag}', Date.now(), 'UTC')
-})
+client.commands = new Collection();
+client.commandArray = [];
 
-client.on("message", msg => {
-  if (msg.content === "$test") {
-    msg.reply("It works!");
-  }
-})
+require(`dotenv`).config();
 
-client.login(process.env.TOKEN)
+const functionFolders = fs.readdirSync(`./src/functions`);
+for (const folder of functionFolders) {
+  const functionFiles = fs
+    .readdirSync(`./src/functions/${folder}`)
+    .filter((file) => file.endsWith(`.js`));
+  for (const file of functionFiles)
+    require(`./functions/${folder}/${file}`)(client);
+}
+
+client.handleEvents();
+client.handleCommands();
+client.login(process.env.TOKEN);
