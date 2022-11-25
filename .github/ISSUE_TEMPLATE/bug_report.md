@@ -1,7 +1,7 @@
 ---
 name: Bug report
 about: Create a report to help us improve our bot!
-title: '(BUG) '
+title: ''
 labels: 'Bug'
 assignees: ''
 
