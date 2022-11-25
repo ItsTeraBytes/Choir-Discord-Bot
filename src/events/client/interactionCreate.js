@@ -4,7 +4,7 @@ module.exports = {
     if (interaction.isChatInputCommand()) {
       const { commands } = client;
       const { commandName } = interaction;
-      const command = command.get(commandName);
+      const command = commands.get(commandName);
       if (!command) return;
 
       try {
@@ -16,7 +16,7 @@ module.exports = {
           Opps, something went wrong and connnot execute this command!\n
           If it persist, please contact the bot developer. Error code: CMD_INTERACTIONCREATE_FAIL
           `,
-          ephemeral: true,
+          ephemeral: true
         });
       }
     }
