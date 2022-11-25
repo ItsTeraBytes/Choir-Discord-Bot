@@ -22,7 +22,7 @@ module.exports = (client) => {
       }
     }
 
-    const clientId = config['CLIENT_ID'];
+    const clientId = config['CLIENT_ID  '];
     const guildId = config['GUILD_ID'];
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
