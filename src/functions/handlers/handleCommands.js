@@ -1,7 +1,8 @@
 const { REST } = require(`@discordjs/rest`)
 const { Routes } = require(`discord-api-types/v9`);
 const fs = require(`fs`);
-const config = JSON.parse(fs.readFileSync(`./src/config.json`));
+const config = require(`../../config.json`);
+commandArray = [];
 
 module.exports = (client) => {
   client.handleCommands = async () => {
@@ -11,13 +12,12 @@ module.exports = (client) => {
         .readdirSync(`./src/commands/${folder}`)
         .filter((file) => file.endsWith(`.js`));
 
-      const { commands, commandArray } = client;
       for (const file of commandFiles) {
         const command = require(`../../commands/${folder}/${file}`);
-        commands.set(command.data.name, command);
-        commandArray.push(command.data.toJSON());
+        client.commands.set(command.name, command);
+        commandArray.push(command);
         console.log(
-          `Command: ${command.data.name} has pass though the handler!`
+          `Command: ${folder}/${file} - ${command.name} has pass though the handler!`
         );
       }
     }
@@ -25,10 +25,12 @@ module.exports = (client) => {
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
       console.log(`Started refreshing application slash commands!`);
+      console.log(commandArray)
 
-      await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
-        body: client.commandArray,
-      });
+      /*await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
+        body: commandArray
+      });*/
+      client.guilds.cache.get(config.GUILD_ID).commands.set(commandArray)
 
       console.log(`Successfully reloaded application slash commands!`);
     } catch (error) {

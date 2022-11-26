@@ -98,9 +98,9 @@ module.exports = {
       const queue = player.getQueue(interaction.guildId);
       if (file_of_button) {
         delete require.cache[
-          require.resolve(`../src/components/buttons/${file_of_button}.js`)
+          require.resolve(`../src/components/musicbuttons/${file_of_button}.js`)
         ];
-        const button = require(`../src/components/buttons/${file_of_button}.js`);
+        const button = require(`../src/components/musicbuttons/${file_of_button}.js`);
         if (button) return button({ client, interaction, customId, queue });
       }
     }

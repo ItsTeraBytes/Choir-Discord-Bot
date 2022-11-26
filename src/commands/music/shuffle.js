@@ -1,17 +1,34 @@
 module.exports = {
-    name: 'shuffle',
-    description: 'shuffle the track',
-    voiceChannel: true,
+  name: "shuffle",
+  description: "shuffle the track",
+  voiceChannel: true,
 
-    async execute({ inter }) {
-        const queue = player.getQueue(inter.guildId);
+  async execute({ interaction }) {
+    const queue = player.getQueue(interaction.guildId);
 
-        if (!queue || !queue.playing) return inter.reply({ content: `No music currently playing ${inter.member}... try again ? ❌`, ephemeral: true });
+    if (!queue || !queue.playing)
+      return interaction.reply({
+        content: `❌ | No music currently playing ${interaction.member}`,
+        ephemeral: true,
+      });
 
-        if (!queue.tracks[0]) return inter.reply({ content: `No music in the queue after the current one ${inter.member}... try again ? ❌`, ephemeral: true });
+    if (!queue.tracks[0])
+      return interaction.reply({
+        content: `❌ | No music in the queue after the current one ${interaction.member}`,
+        ephemeral: true,
+      });
 
-        await queue.shuffle();
+    await queue.shuffle();
 
-        return inter.reply({ content:`Queue shuffled **${queue.tracks.length}** song(s) ! ✅`});
-    },
+    if (queue.tracks.length === 1) {
+        const success_message = '✅ | Queue shuffled **${queue.tracks.length}** song';
+    } else {
+        const success_message = '✅ | Queue shuffled **${queue.tracks.length}** songs';
+    }
+      
+
+    return interaction.reply({
+      content: success_message,
+    });
+  },
 };

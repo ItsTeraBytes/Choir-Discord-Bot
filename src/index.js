@@ -1,6 +1,7 @@
 const { Client, Collection, GatewayIntentBits } = require(`discord.js`);
-const { Player } = require('discord-player');
+const { Player } = require("discord-player");
 const fs = require(`fs`);
+const config = require(`./config.json`);
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -29,7 +30,6 @@ for (const folder of functionFolders) {
     require(`./functions/${folder}/${file}`)(client);
 }
 
-config = require('./config');
 player = new Player(client, config.music.discordPlayer);
 
 client.handleEvents();
