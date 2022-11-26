@@ -1,6 +1,20 @@
 {
-    "CLIENT_ID":"1038876542081703946",
-    "GUILD_ID":"783749753988841493",
-    "BOT_OWNER":"512028479701909504",
-    "BOT_ADMINS":""
+  "CLIENT_ID": "1038876542081703946",
+  "GUILD_ID": "783749753988841493",
+  "BOT_OWNER": "512028479701909504",
+  "BOT_ADMINS": "",
+
+  "music": {
+    "maxVol": 100,
+    "leaveOnEnd": true,
+    "loopMessage": false,
+    "spotifyBridge": true,
+    "defaultvolume": 75,
+    "discordPlayer": {
+      "ytdlOptions": {
+        "quality": "highestaudio",
+        "highWaterMark": 15
+      }
+    }
+  }
 }

@@ -22,13 +22,11 @@ module.exports = (client) => {
       }
     }
 
-    const clientId = config['CLIENT_ID'];
-    const guildId = config['GUILD_ID'];
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
       console.log(`Started refreshing application slash commands!`);
 
-      await rest.put(Routes.applicationGuildCommands(clientId, guildId), {
+      await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
         body: client.commandArray,
       });
 

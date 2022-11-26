@@ -1,6 +1,16 @@
 const { Client, Collection, GatewayIntentBits } = require(`discord.js`);
+const { Player } = require('discord-player');
 const fs = require(`fs`);
-const client = new Client({ intents: GatewayIntentBits.Guilds });
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.MessageContent,
+  ],
+  disableMentions: "everyone",
+});
 
 client.commands = new Collection();
 client.buttons = new Collection();
@@ -18,6 +28,9 @@ for (const folder of functionFolders) {
   for (const file of functionFiles)
     require(`./functions/${folder}/${file}`)(client);
 }
+
+config = require('./config');
+player = new Player(client, config.music.discordPlayer);
 
 client.handleEvents();
 client.handleCommands();
