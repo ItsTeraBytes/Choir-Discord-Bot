@@ -15,8 +15,7 @@ module.exports = {
         console.error(error);
         await interaction.reply({
           content: `
-          Opps, something went wrong and connnot execute this command!\n
-          If it persist, please contact the bot developer. Error code: CMD_INTERACTIONCREATE_FAIL
+          Opps, something went wrong and connnot execute this command!\nIf it persist, please contact the bot developer. Error code: CMD_INTERACTIONCREATE_FAIL
           `,
           ephemeral: true,
         });
