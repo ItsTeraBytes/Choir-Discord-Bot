@@ -12,12 +12,13 @@ module.exports = (client) => {
         .readdirSync(`./src/commands/${folder}`)
         .filter((file) => file.endsWith(`.js`));
 
+      const { commands, commandArray } = client;
       for (const file of commandFiles) {
         const command = require(`../../commands/${folder}/${file}`);
-        client.commands.set(command.name, command);
-        commandArray.push(command);
+        client.commands.set(command.data.name, command);
+        commandArray.push(command.data.toJSON());
         console.log(
-          `Command: ${folder}/${file} - ${command.name} has pass though the handler!`
+          `Command: ${folder}/${file} - ${command.data.name} has pass though the handler!`
         );
       }
     }
@@ -25,12 +26,11 @@ module.exports = (client) => {
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
       console.log(`Started refreshing application slash commands!`);
-      console.log(commandArray)
+      console.table(client.commandArray)
 
-      /*await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
-        body: commandArray
-      });*/
-      client.guilds.cache.get(config.GUILD_ID).commands.set(commandArray)
+      await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
+        body: client.commandArray
+      });
 
       console.log(`Successfully reloaded application slash commands!`);
     } catch (error) {
