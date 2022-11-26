@@ -1,0 +1,51 @@
+name: Bug Report
+description: Report a bug!
+title: "BUG: "
+labels: [Bug]
+assignees: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Describe the bug
+      placeholder: The bug is about ...
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: Provide steps to reproduce this bug
+      placeholder: |
+        1. Type ...
+        2. Click ...
+        3. You should see it at ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: What did you expect to happen?
+      placeholder: I expected ...
+    validations:
+      required: true
+  - type: textarea
+    id: errorcode
+    attributes:
+      label: Error code
+      description: Was there a error code provided? If so please put it here.
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Info
+      description: Any additional info that you think might be useful.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      description: Before submitting your feature request, please affirm the following
+      options:
+        - label: I have checked for [similar bug reports](https://github.com/ItsTeraBytes/Choir-Discord-Bot/labels/Bug) to avoid duplicate reports
+          required: true

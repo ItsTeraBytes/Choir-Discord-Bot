@@ -1,0 +1,58 @@
+const { InteractionType } = require(`discord.js`);
+
+module.exports = {
+  name: `interactionCreate`,
+  async execute(interaction, client) {
+    if (interaction.isChatInputCommand()) {
+      const { commands } = client;
+      const { commandName } = interaction;
+      const command = commands.get(commandName);
+      if (!command) return;
+
+      try {
+        await command.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+        await interaction.reply({
+          content: `
+          Opps, something went wrong and connnot execute this command!\nIf it persist, please contact the bot developer. Error code: CMD_INTERACTIONCREATE_FAIL
+          `,
+          ephemeral: true,
+        });
+      }
+    } else if (interaction.isButton()) {
+      const { buttons } = client;
+      const { customID } = interaction;
+      const button = buttons.get(customID);
+      if (!button) return new Error(`There is no code for this button!`);
+
+      try {
+        await button.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (interaction.isSelectMenu()) {
+      const { selectMenus } = client;
+      const { customID } = interaction;
+      const menu = selectMenus.get(customID);
+      if (!menu) return new Error(`There is no code for this menu!`);
+
+      try {
+        await menu.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (interaction.type == InteractionType.ModalSubmit) {
+      const { modals } = client;
+      const { customID } = interaction;
+      const modal = modals.get(customID);
+      if (!modal) return new Error(`There is no code for this modal!`);
+
+      try {
+        await modal.execute(interaction, client);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+};

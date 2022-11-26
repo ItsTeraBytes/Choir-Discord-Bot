@@ -1,0 +1,40 @@
+name: Feature Request
+description: Suggest an idea!
+title: "Feature:"
+labels: [Feature]
+assignees: []
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe your feature.
+      description: Describe you want to add.
+      placeholder: I would like to add this new feature that will ...
+    validations:
+      required: true
+  - type: textarea
+    id: pros
+    attributes:
+      label: How would this feature benefit?
+      description: Explain how you think this feature will help everyone.
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: Additional Info
+      description: Any additional info that you think might be useful or relevant to this feature request
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      description: Before submitting your feature request, please affirm the following
+      options:
+        - label: I have checked for [similar feature requests](https://github.com/ItsTeraBytes/Choir-Discord-Bot/labels/Feature) to avoid duplicate requests
+          required: true
+        - label: I have confirmed that my requests is **not** on the [will not add label](https://github.com/ItsTeraBytes/Choir-Discord-Bot/labels/%28Feature%29%20WIll%20not%20add)
+          required: true
