@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require("discord.js");
+
 module.exports = {
-  name: "skip",
-  description: "stop the track",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`stop`)
+    .setDescription(`Stop the track`),
 
   execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
@@ -12,12 +15,10 @@ module.exports = {
         ephemeral: true,
       });
 
-    const success = queue.skip();
+    queue.destroy();
 
-    return interaction.reply({
-      content: success
-        ? `✅ | Current music ${queue.current.title} skipped`
-        : `❌ | Something went wrong ${interaction.member}`,
+    interaction.reply({
+      content: `✅ | Music stopped and music queue cleared`,
     });
   },
 };

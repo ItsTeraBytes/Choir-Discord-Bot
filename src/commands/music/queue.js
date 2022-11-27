@@ -1,11 +1,12 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "queue",
-  description: "Get the songs in the queue",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`queue`)
+    .setDescription(`Get the list of songs in queue`),
 
-  execute({ client, interaction }) {
+  async execute({ client, interaction }) {
     const queue = player.getQueue(interaction.guildId);
 
     if (!queue)
@@ -40,7 +41,9 @@ module.exports = {
       .setColor("#ff0000")
       .setThumbnail(interaction.guild.iconURL({ size: 2048, dynamic: true }))
       .setAuthor({
-        name: `Server queue - ${interaction.guild.name} ${methods[queue.repeatMode]}`,
+        name: `Server queue - ${interaction.guild.name} ${
+          methods[queue.repeatMode]
+        }`,
         iconURL: client.user.displayAvatarURL({ size: 1024, dynamic: true }),
       })
       .setDescription(

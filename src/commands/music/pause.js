@@ -1,10 +1,14 @@
-module.exports = {
-  name: "pause",
-  description: "pause the track",
-  voiceChannel: true,
+const config = require(`../../config.json`);
+const { SlashCommandBuilder } = require(`discord.js`);
 
-  execute({ interaction }) {
-    const queue = player.getQueue(interaction.guildId);
+module.exports = {
+  voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`pause`)
+    .setDescription(`Pauses the music`),
+
+  async execute(interaction) {
+    const queue = player.getQueue(config.GUILD_ID);
 
     if (!queue)
       return interaction.reply({

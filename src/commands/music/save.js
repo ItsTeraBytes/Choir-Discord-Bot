@@ -1,9 +1,10 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "save",
-  description: "save the current track!",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`save`)
+    .setDescription(`Save the track`),
 
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);

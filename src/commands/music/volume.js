@@ -1,23 +1,21 @@
-const config = require(`../../config.json`)
-const maxVol = config.music.maxVol;
-const { ApplicationCommandOptionType } = require("discord.js");
+const config = require(`../../config.json`);
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "volume",
-  description: "adjust",
   voiceChannel: true,
-  options: [
-    {
-      name: "volume",
-      description: "the amount volume",
-      type: ApplicationCommandOptionType.Number,
-      required: true,
-      minValue: 1,
-      maxValue: maxVol,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`volume`)
+    .setDescription(`Adjust the volume`)
+    .addNumberOption((option) =>
+      option
+        .setName(`volume`)
+        .setDescription(`The desired volume`)
+        .setRequired(false)
+        .setMinValue(config.music.minVol)
+        .setMaxValue(config.music.maxVol)
+    ),
 
-  execute({ interaction }) {
+  async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
 
     if (!queue)

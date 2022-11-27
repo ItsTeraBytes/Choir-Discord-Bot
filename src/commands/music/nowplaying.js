@@ -1,11 +1,17 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder } = require("discord.js");
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+} = require("discord.js");
 
 module.exports = {
-  name: "nowplaying",
-  description: "veiw what is playing!",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`nowplaying`)
+    .setDescription(`View what is playing!`),
 
-  execute({ interaction }) {
+  async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
 
     if (!queue)

@@ -1,3 +1,4 @@
+const config = require(`../../config.json`);
 const { SlashCommandBuilder } = require(`discord.js`);
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     .setDescription(`Clear all music in the queue`),
 
   async execute({ interaction }) {
-    const queue = player.getQueue(interaction.guildId);
+    const queue = player.getQueue(config.GUILD_ID);
 
     if (!queue || !queue.playing)
       return interaction.reply({

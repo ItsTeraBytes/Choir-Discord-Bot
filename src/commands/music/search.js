@@ -1,18 +1,17 @@
-const { ApplicationCommandOptionType, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const { QueryType } = require("discord-player");
 
 module.exports = {
-  name: "search",
-  description: "search a track",
   voiceChannel: true,
-  options: [
-    {
-      name: "song",
-      description: "the song you want to search",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`search`)
+    .setDescription(`Search a track`)
+    .addStringOption((option) =>
+      option
+        .setName(`song`)
+        .setDescription(`The song you want to search`)
+        .setRequired(true)
+    ),
 
   async execute({ client, interaction }) {
     const song = interaction.options.getString("song");

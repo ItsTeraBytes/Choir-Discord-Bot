@@ -1,23 +1,22 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "jump",
-  description: "Jumps to particular track in queue",
   voiceChannel: true,
-  options: [
-    {
-      name: "song",
-      description: "the name/url of the track you want to jump to",
-      type: ApplicationCommandOptionType.String,
-      required: false,
-    },
-    {
-      name: "number",
-      description: "the place in the queue the song is in",
-      type: ApplicationCommandOptionType.Number,
-      required: false,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`jump`)
+    .setDescription(`Jumps to a particular track in queue`)
+    .addStringOption(option =>
+      option
+        .setName(`song`)
+        .setDescription(`The name/url of the track you want to jump to"`)
+        .setRequired(true)
+    )
+    .addNumberOption(option =>
+      option
+        .setName(`number`)
+        .setDescription(`The place in the queue the song is in`)
+        .setRequired(false)
+    ),
 
   async execute({ interaction }) {
     const track = interaction.options.getString("song");

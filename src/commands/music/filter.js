@@ -1,22 +1,21 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "filter",
-  description: "add a filter to your track",
   voiceChannel: true,
-  options: [
-    {
-      name: "filter",
-      description: "filter you want to add",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-      choices: [
-        ...Object.keys(require("discord-player").AudioFilters.filters)
-          .map((m) => Object({ name: m, value: m }))
-          .splice(0, 25),
-      ],
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`filter`)
+    .setDescription(`Filter you want to add`)
+    .addStringOption((option) =>
+      option
+        .setName(`filter`)
+        .setDescription(`Filter you want to add`)
+        .setRequired(true)
+        .addChoices(
+          ...Object.keys(require("discord-player").AudioFilters.filters)
+            .map((m) => Object({ name: m, value: m }))
+            .splice(0, 25)
+        )
+    ),
 
   async execute({ interaction, client }) {
     const queue = player.getQueue(interaction.guildId);

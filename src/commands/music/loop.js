@@ -1,24 +1,24 @@
 const { QueueRepeatMode } = require("discord-player");
-const { ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "loop",
-  description: "enable or disable looping of song's or the whole queue",
   voiceChannel: true,
-  options: [
-    {
-      name: "action",
-      description: "what action you want to preform on the loop",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-      choices: [
-        { name: "Queue", value: "enable_loop_queue" },
-        { name: "Disable", value: "disable_loop" },
-        { name: "Song", value: "enable_loop_song" },
-      ],
-    },
-  ],
-  execute({ interaction }) {
+  data: new SlashCommandBuilder()
+    .setName(`loop`)
+    .setDescription(`Enable or disable looping of song's or the whole queue`)
+    .addStringOption(option =>
+      option
+        .setName(`action`)
+        .setDescription(`What action you want to preform on the loop?`)
+        .setRequired(true)
+        .addChoices(
+          { name: "Queue", value: "enable_loop_queue" },
+          { name: "Disable", value: "disable_loop" },
+          { name: "Song", value: "enable_loop_song" }
+        )
+    ),
+
+  async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
 
     if (!queue || !queue.playing)

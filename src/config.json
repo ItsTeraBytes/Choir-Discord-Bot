@@ -5,6 +5,7 @@
   "BOT_ADMINS": "",
 
   "music": {
+    "minVol":1,
     "maxVol": 100,
     "leaveOnEnd": true,
     "loopMessage": false,

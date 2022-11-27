@@ -1,23 +1,22 @@
-const { ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "remove",
-  description: "remove a song from the queue",
   voiceChannel: true,
-  options: [
-    {
-      name: "song",
-      description: "the name/url of the track you want to remove",
-      type: ApplicationCommandOptionType.String,
-      required: false,
-    },
-    {
-      name: "number",
-      description: "the place in the queue the song is in",
-      type: ApplicationCommandOptionType.Number,
-      required: false,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`remove`)
+    .setDescription(`Remove a song from queue`)
+    .addStringOption(option =>
+      option
+        .setName(`song`)
+        .setDescription(`The name/url of the track you want to remove`)
+        .setRequired(true)
+    )
+    .addNumberOption(option =>
+      option
+        .setName(`number`)
+        .setDescription(`The place in the queue the song is in`)
+        .setRequired(false)
+    ),
 
   async execute({ interaction }) {
     const number = interaction.options.getNumber("number");
@@ -40,7 +39,9 @@ module.exports = {
       for (let song of queue.tracks) {
         if (song.title === track || song.url === track) {
           queue.remove(song);
-          return interaction.reply({ content: `✅ | Removed ${track} from the queue` });
+          return interaction.reply({
+            content: `✅ | Removed ${track} from the queue`,
+          });
         }
       }
 

@@ -1,21 +1,21 @@
+const config = require(`../../config.json`);
 const { QueryType } = require("discord-player");
-const { ApplicationCommandOptionType } = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "play",
-  description: "play a song!",
   voiceChannel: true,
-  options: [
-    {
-      name: "song",
-      description: "the song you want to play",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`play`)
+    .setDescription(`Play a song!`)
+    .addStringOption((option) =>
+      option
+        .setName(`song`)
+        .setDescription(`The song you want to play now`)
+        .setRequired(true)
+    ),
 
-  async execute({ interaction }) {
-    const song = interaction.options.getString("song");
+  async execute(interaction) {
+    const song = interaction.options.getString(`song`);
     const res = await player.search(song, {
       requestedBy: interaction.member,
       searchEngine: QueryType.AUTO,

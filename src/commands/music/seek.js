@@ -1,21 +1,18 @@
 const ms = require("ms");
-const {
-  ApplicationCommandType,
-  ApplicationCommandOptionType,
-} = require("discord.js");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "seek",
-  description: "skip back or foward in a song",
   voiceChannel: true,
-  options: [
-    {
-      name: "time",
-      description: "time that you want to skip to",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`seek`)
+    .setDescription(`Skip back or forward in a song`)
+    .addStringOption((option) =>
+      option
+        .setName(`time`)
+        .setDescription(`Time you want to skip to`)
+        .setRequired(true)
+    ),
+
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
 

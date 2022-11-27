@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require("discord.js");
+
 module.exports = {
-  name: "shuffle",
-  description: "shuffle the track",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`shuffle`)
+    .setDescription(`Shuffle the track`),
 
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
@@ -21,11 +24,12 @@ module.exports = {
     await queue.shuffle();
 
     if (queue.tracks.length === 1) {
-        const success_message = '✅ | Queue shuffled **${queue.tracks.length}** song';
+      const success_message =
+        "✅ | Queue shuffled **${queue.tracks.length}** song";
     } else {
-        const success_message = '✅ | Queue shuffled **${queue.tracks.length}** songs';
+      const success_message =
+        "✅ | Queue shuffled **${queue.tracks.length}** songs";
     }
-      
 
     return interaction.reply({
       content: success_message,

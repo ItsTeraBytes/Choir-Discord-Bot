@@ -1,18 +1,17 @@
-const { ApplicationCommandOptionType } = require("discord.js");
 const { QueryType } = require("discord-player");
+const { SlashCommandBuilder } = require("discord.js");
 
 module.exports = {
-  name: "playnext",
-  description: "song you want to playnext",
   voiceChannel: true,
-  options: [
-    {
-      name: "song",
-      description: "the song you want to playnext",
-      type: ApplicationCommandOptionType.String,
-      required: true,
-    },
-  ],
+  data: new SlashCommandBuilder()
+    .setName(`playnext`)
+    .setDescription(`Song you want to playnext`)
+    .addStringOption((option) =>
+      option
+        .setName(`song`)
+        .setDescription(`The song you want to playnext`)
+        .setRequired(true)
+    ),
 
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);
