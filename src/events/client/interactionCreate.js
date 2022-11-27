@@ -7,7 +7,6 @@ module.exports = {
       const { commands } = client;
       const { commandName } = interaction;
       const command = commands.get(commandName);
-      console.log(command)
       if (!command) //If command cannot be found
         return interaction.reply({
           embeds: [
