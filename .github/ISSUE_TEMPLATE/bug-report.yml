@@ -32,11 +32,6 @@ body:
     validations:
       required: true
   - type: textarea
-    id: errorcode
-    attributes:
-      label: Error code
-      description: Was there a error code provided? If so please put it here.
-  - type: textarea
     id: additional-info
     attributes:
       label: Additional Info
