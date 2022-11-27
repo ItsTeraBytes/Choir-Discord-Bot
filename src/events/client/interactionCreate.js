@@ -7,8 +7,8 @@ module.exports = {
       const { commands } = client;
       const { commandName } = interaction;
       const command = commands.get(commandName);
-      if (!command) //If command cannot be found
-        return interaction.reply({
+      if (!command) return; 
+      interaction.reply({
           embeds: [
             new EmbedBuilder()
               .setColor("#ff0000")
@@ -61,7 +61,7 @@ module.exports = {
             ephemeral: true,
           });
       }
-      command.execute({ interaction, client });
+      /*await command.execute( interaction, client );
       if (interaction.type === InteractionType.MessageComponent) {
         const customId = JSON.parse(interaction.customId);
         const file_of_button = customId.ffb;
@@ -75,7 +75,7 @@ module.exports = {
           const button = require(`../src/components/musicbuttons/${file_of_button}.js`);
           if (button) return button({ client, interaction, customId, queue });
         }
-      }
+      }*/
     } else if (interaction.isButton()) {
       const { buttons } = client;
       const { customID } = interaction;

@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require(`discord.js`);
+
 module.exports = {
-  name: "clear",
-  description: "clear all the music in the queue",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`clear`)
+    .setDescription(`Clear all music in the queue`),
 
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);

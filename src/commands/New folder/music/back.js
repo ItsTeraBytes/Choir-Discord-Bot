@@ -1,7 +1,10 @@
+const { SlashCommandBuilder } = require(`discord.js`);
+
 module.exports = {
-  name: "back",
-  description: "Go back the song before",
   voiceChannel: true,
+  data: new SlashCommandBuilder()
+    .setName(`back`)
+    .setDescription(`Go back to the song before`),
 
   async execute({ interaction }) {
     const queue = player.getQueue(interaction.guildId);

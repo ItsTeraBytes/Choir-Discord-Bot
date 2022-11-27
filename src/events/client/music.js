@@ -1,4 +1,5 @@
 const { ApplicationCommandOptionType, ActionRowBuilder, ButtonBuilder, EmbedBuilder } = require('discord.js');
+const config = require(`../../config.json`);
 
 player.on('error', (queue, error) => {
     console.log(`Error emitted from the queue ${error.message}`);

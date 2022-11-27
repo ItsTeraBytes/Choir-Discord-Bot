@@ -3,22 +3,22 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   EmbedBuilder,
-  PermissionsBitField,
+  PermissionFlagsBits,
+  SlashCommandBuilder
 } = require("discord.js");
 
-module.exports = {
-  name: "controller",
-  description: "set controller channel ",
-  voiceChannel: false,
-  permissions: PermissionsBitField.Flags.ManageMessages,
-  options: [
-    {
-      name: "channel",
-      description: "the channel you want to send it to",
-      type: ApplicationCommandOptionType.Channel,
-      required: true,
-    },
-  ],
+  module.exports = {
+    voiceChannel: false,
+    data: new SlashCommandBuilder()
+      .setName(`controller`)
+      .setDescription(`Set controller channel`)
+      .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
+      .addChannelOption(option =>
+        option
+          .setName('channel')
+          .setDescription('The channel you want to send to')
+          .setRequired(true)),
+
   async execute({ interaction, client }) {
     let Channel = interaction.options.getChannel("channel");
     if (Channel.type !== 0)
