@@ -7,7 +7,7 @@ module.exports = {
       const { commands } = client;
       const { commandName } = interaction;
       const command = commands.get(commandName);
-      if (!command) return; 
+      if (!command) return/*
       interaction.reply({
           embeds: [
             new EmbedBuilder()
@@ -17,7 +17,7 @@ module.exports = {
               ),
           ],
           ephemeral: true,
-        });
+        });*/
       try {
         await command.execute(interaction, client);
       } catch (error) {
