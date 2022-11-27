@@ -1,11 +1,12 @@
 const { SlashCommandBuilder } = require(`discord.js`);
 
 module.exports = {
+  voiceChannel : false,
   data: new SlashCommandBuilder()
-    .setName('ping')
+    .setName(`ping`)
     .setDescription(`Returns my ping`),
-  
-    async execute(interaction, client) {
+
+  async execute(interaction, client) {
     const message = await interaction.deferReply({
       fetchReply: true
     });

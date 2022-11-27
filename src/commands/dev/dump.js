@@ -2,6 +2,7 @@ const {
   PermissionFlagsBits,
   SlashCommandBuilder,
 } = require("discord.js");
+const { truncateSync } = require("fs");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -15,6 +16,7 @@ module.exports = {
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
 
   async execute(interaction, client) {
-    const target = interaction.options.getString(`target`);
+    //const target = interaction.options.getString(`target`);
+    await interaction.reply(`Sorry, this command is not finshed.`);
   },
 };

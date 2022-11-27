@@ -26,7 +26,6 @@ module.exports = (client) => {
     const rest = new REST({ version: `9` }).setToken(process.env.token);
     try {
       console.log(`Started refreshing application slash commands!`);
-      console.table(client.commandArray)
 
       await rest.put(Routes.applicationGuildCommands(config.CLIENT_ID, config.GUILD_ID), {
         body: client.commandArray
